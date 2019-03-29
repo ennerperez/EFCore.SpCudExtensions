@@ -87,7 +87,7 @@ namespace EFCore.SpCudExtensions.Tests
 
                 if (isSpCudOperation)
                 {
-                    context.SpCudInsert(entities, new SpCudConfig() { SetOutputIdentity = true });
+                    //context.SpCudInsert(entities, new SpCudConfig() { SetOutputIdentity = true });
                 }
                 else
                 {

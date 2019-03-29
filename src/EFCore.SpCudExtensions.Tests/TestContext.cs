@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCore.SpCudExtensions.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
@@ -13,9 +14,7 @@ namespace EFCore.SpCudExtensions.Tests
     {
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemHistory> ItemHistories { get; set; }
-
         public DbSet<UserRole> UserRoles { get; set; }
-
         public DbSet<Document> Documents { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -48,7 +47,7 @@ namespace EFCore.SpCudExtensions.Tests
             //modelBuilder.Entity<UserRole>().MapToStoredProcedures(this);
             //modelBuilder.Entity<Info>().MapToStoredProcedures(this);
 
-            //modelBuilder.MapToStoredProcedures();
+            modelBuilder.MapToStoredProcedures();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -65,6 +64,7 @@ namespace EFCore.SpCudExtensions.Tests
             var databaseName = nameof(EFCoreSpCudTest);
             var connectionString = $"Server=localhost;Database={databaseName};Trusted_Connection=True;MultipleActiveResultSets=true";
             builder.UseSqlServer(connectionString); // Can NOT Test with UseInMemoryDb (Exception: Relational-specific methods can only be used when the context is using a relational)
+            builder.UseSpCudGenetarion();
             return builder.Options;
         }
     }

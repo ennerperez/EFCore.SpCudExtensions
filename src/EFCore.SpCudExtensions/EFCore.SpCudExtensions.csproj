@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DefaultMappings.cs.old" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="DefaultMappings.cs.old" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FastMember.Signed" Version="1.4.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
