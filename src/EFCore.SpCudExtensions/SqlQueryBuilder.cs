@@ -8,7 +8,6 @@ namespace EFCore.SpCudExtensions
 {
     public static class SqlQueryBuilder
     {
-
         public static string CreateInsertSp(TableInfo tableInfo)
         {
             var columnsDefs = tableInfo.ConvertibleProperties;
@@ -16,10 +15,12 @@ namespace EFCore.SpCudExtensions
                 columnsDefs.Remove(tableInfo.TimeStampColumnName);
 
             var columnsNames = columnsDefs.Keys.ToList();
+            var columsWithTypes = columnsDefs.ToDictionary(m => m.Key, n => n.Value.ToString());
             var q = $"CREATE PROCEDURE {tableInfo.SchemaFormated}[{tableInfo.TableName}_Insert] " + Environment.NewLine +
-                    $"  {GetCommaSeparatedParamsWithTypes(columnsDefs)} " + Environment.NewLine +
+                    $"  {GetCommaSeparatedParamsWithTypes(columsWithTypes)} " + Environment.NewLine +
                     $"AS " + Environment.NewLine +
                     $"  INSERT INTO {tableInfo.FullTableName} ({GetCommaSeparatedColumns(columnsNames)}) VALUES ({GetCommaSeparatedParams(columnsNames)}) " + Environment.NewLine +
+                    $"  SELECT SCOPE_IDENTITY() " + Environment.NewLine +
                     $"RETURN";
             return q;
         }

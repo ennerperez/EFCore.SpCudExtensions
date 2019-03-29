@@ -43,12 +43,17 @@ namespace EFCore.SpCudExtensions.Tests
             //modelBuilder.Entity<Document>().Property(x => x.RowVersion).HasColumnType("timestamp").ValueGeneratedOnAddOrUpdate().HasConversion(new NumberToBytesConverter<ulong>()).IsConcurrencyToken();
 
             //modelBuilder.Entity<Item>().HasQueryFilter(p => p.Description != "1234"); // For testing Global Filter
+            //modelBuilder.FinalizeModel();
 
+            //modelBuilder.Entity<UserRole>().MapToStoredProcedures(this);
+            //modelBuilder.Entity<Info>().MapToStoredProcedures(this);
 
-            modelBuilder.Entity<UserRole>().MapToStoredProcedures(this);
-            modelBuilder.Entity<UserRole>().MapToStoredProcedures(this);
+            //modelBuilder.MapToStoredProcedures();
+        }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
     }
 
@@ -145,6 +150,7 @@ namespace EFCore.SpCudExtensions.Tests
 
         [Timestamp]
         public byte[] VersionChange { get; set; }
+
         //public ulong RowVersion { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)] // Computed columns have to be configured with Fluent API

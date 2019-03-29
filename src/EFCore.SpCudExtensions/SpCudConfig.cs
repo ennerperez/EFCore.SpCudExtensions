@@ -7,11 +7,10 @@ namespace EFCore.SpCudExtensions
 {
     public class SpCudConfig
     {
-
         public bool SetOutputIdentity { get; set; }
         public int? NotifyAfter { get; set; }
 
-        public bool EnableStreaming { get; set; }
+        public int? CommandTimeout { get; set; }
 
         public bool TrackingEntities { get; set; }
 

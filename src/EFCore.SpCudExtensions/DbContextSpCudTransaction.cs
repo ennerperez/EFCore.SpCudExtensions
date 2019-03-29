@@ -14,9 +14,11 @@ namespace EFCore.SpCudExtensions
             {
                 return;
             }
+            TableInfo tableInfo = TableInfo.CreateInstance(context, entities, operationType, spCudConfig);
 
             if (operationType == OperationType.Insert)
             {
+                SqlSpCudOperation.Insert(context, entities, tableInfo, progress);
             }
             else if (operationType == OperationType.Update)
             {
@@ -24,7 +26,6 @@ namespace EFCore.SpCudExtensions
             else if (operationType == OperationType.Delete)
             {
             }
-
         }
 
         public static Task ExecuteAsync<T>(DbContext context, IList<T> entities, OperationType operationType, SpCudConfig spCudConfig, Action<decimal> progress) where T : class
@@ -45,7 +46,6 @@ namespace EFCore.SpCudExtensions
             }
 
             return null;
-
         }
     }
 }
