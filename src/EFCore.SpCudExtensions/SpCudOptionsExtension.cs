@@ -11,9 +11,9 @@ namespace EFCore.SpCudExtensions
     {
         private ISpCudProvider _spCudProvider;
 
-        internal SpCudOptionsExtension(ISpCudProvider cacheProvider)
+        internal SpCudOptionsExtension(ISpCudProvider spCudProvider)
         {
-            _spCudProvider = cacheProvider;
+            _spCudProvider = spCudProvider;
         }
 
         public string LogFragment => $"Using {_spCudProvider.GetType().Name}";
