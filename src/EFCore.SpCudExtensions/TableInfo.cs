@@ -4,10 +4,15 @@ using System.Text;
 
 namespace EFCore.SpCudExtensions
 {
-    internal class TableInfo
+    public class TableInfo
     {
-        public string CreateSpName { get; set; }
-        public string UpdateSpName { get; set; }
-        public string DeleteSpName { get; set; }
+        public string InsertSpName => $"{SchemaFormated}[{TableName}_Insert]";
+        public string UpdateSpName => $"{SchemaFormated}[{TableName}_Update]";
+        public string DeleteSpName => $"{SchemaFormated}[{TableName}_Delete]";
+
+        public string Schema { get; set; }
+        public string SchemaFormated => Schema != null ? $"[{Schema}]." : "";
+        public string TableName { get; set; }
+        public string FullTableName => $"{SchemaFormated}[{TableName}]";
     }
 }

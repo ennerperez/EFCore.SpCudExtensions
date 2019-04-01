@@ -31,6 +31,9 @@ namespace EFCore.SpCudExtensions
 
         public void Validate(IDbContextOptions options)
         {
+            //TODO: Create TableInfo Instance
+            if (!_spCudProvider.CheckSpExist(null, null))
+                _spCudProvider.CreateInsertSp(null, null);
         }
 
         public virtual ISpCudProvider SpCudProvider => _spCudProvider;
